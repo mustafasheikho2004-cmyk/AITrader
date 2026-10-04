@@ -1,0 +1,15 @@
+workflows:
+  android-apk:
+    name: AI Trader APK
+    instance_type: linux_x2
+    environment:
+      java: 17
+    scripts:
+      - name: Extract project
+        script: unzip -o AITrader_source.zip -d project
+      - name: Build APK
+        script: |
+          cd project/AITraderAndroid
+          gradle :app:assembleDebug --stacktrace
+    artifacts:
+      - project/AITraderAndroid/app/build/outputs/apk/debug/app-debug.apk
